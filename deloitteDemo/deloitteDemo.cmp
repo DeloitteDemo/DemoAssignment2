@@ -1,0 +1,62 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <!--use boolean attribute for Store true/false value,
+    make default to "false" so modal box are not display on the load of component. 
+    --> 
+    <!--use string attribute for Store Confirm/Cancel value,
+    make default to " " so message is not display on the load of component. 
+    --> 
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="returnValue" type="String" default=" "/>
+    
+  
+    <div class="slds-text-align_center slds-m-around_x-small">
+        <div id="my-block">
+        <p>{!v.returnValue}</p>
+        <lightning:button 
+                          label="Click me to know what I m thinking"
+                          title=" Click me to know what I m thinking "
+                          onclick="{! c.openModel }"
+                          class = "slds-button slds-button_outline-brand "/>
+        </div>
+        <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+        <aura:if isTrue="{!v.isOpen}">
+            
+            <!-- MODAL BOX Start --> 
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!--  MODAL BOX HEADER Start -->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">My current Mindset</h2>
+                        <h1 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate">This is my cool assignment</h1>
+                    </header>
+                    <!--  MODAL BOX BODY Part Start -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p><b>
+                        I am so excited to learn Lightning
+                            </b>
+                        </p>
+                    </div>
+                    <!-- MODAL BOX FOOTER Part Start -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{! c.closeModel }"/>
+                        <lightning:button variant="brand" 
+                                          label="Confirm"
+                                          title="Confirm"
+                                          onclick="{! c.confirmModel }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <!-- MODAL BOX Part END Here -->
+            
+        </aura:if>
+    </div>
+</aura:component>
